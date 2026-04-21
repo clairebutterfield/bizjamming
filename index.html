@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biz Jamming — Claire Butterfield</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #1a1a1a;
+      --gray:    #6b6b6b;
+      --light:   #f5f4f0;
+      --white:   #ffffff;
+      --accent:  #2d6a4f;
+      --accent2: #d4ead9;
+      --max:     1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid #e8e5e0;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.15rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .nav-logo span { color: var(--accent); }
+    .nav-logo small { font-size: 0.75rem; font-weight: normal; color: var(--gray); letter-spacing: 0.02em; }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--gray);
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      background: var(--light);
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-text p {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--gray);
+      margin-bottom: 2rem;
+      max-width: 44ch;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      text-decoration: none;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #1f4f39; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      margin-left: 1rem;
+    }
+
+    .btn-outline:hover { background: var(--accent); color: var(--white); }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* SECTION SHARED */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 4rem;
+    }
+
+    .about-body p {
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-body p strong {
+      color: var(--black);
+    }
+
+    .about-callout {
+      background: var(--light);
+      padding: 2.5rem;
+      border-left: 4px solid var(--accent);
+    }
+
+    .about-callout blockquote {
+      font-size: 1.25rem;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .about-callout cite {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.875rem;
+      color: var(--gray);
+      font-style: normal;
+    }
+
+    .bio-strip {
+      border-top: 1px solid #e8e5e0;
+      padding-top: 3rem;
+    }
+
+    .bio-strip h3 {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-credentials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .bio-cred {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .bio-cred-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    .bio-cred p {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .bio-cred p strong {
+      display: block;
+      color: var(--black);
+      font-size: 0.95rem;
+      margin-bottom: 0.15rem;
+    }
+
+    /* SERVICES */
+    #services {
+      background: var(--light);
+    }
+
+    .services-intro {
+      max-width: 60ch;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .step {
+      background: var(--white);
+      padding: 2rem;
+    }
+
+    .step-number {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .step h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .for-who {
+      background: var(--white);
+      padding: 2.5rem;
+      border-top: 3px solid var(--black);
+    }
+
+    .for-who h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .for-who p {
+      font-family: 'Helvetica Neue', sans-serif;
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 72ch;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    #contact .section-label { color: var(--accent); }
+
+    #contact .section-title { color: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-intro p {
+      font-family: 'Helvetica Neue', sans-serif;
+      color: #aaa;
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      color: var(--white);
+      padding: 0.8rem 1rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    select option { background: #2a2a2a; }
+
+    form .btn { align-self: flex-start; margin-top: 0.5rem; }
+
+    /* FOOTER */
+    footer {
+      background: #111;
+      color: #555;
+      text-align: center;
+      padding: 2rem;
+      font-family: 'Helvetica Neue', sans-serif;
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-inner,
+      .about-grid,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .hero-image { order: -1; }
+
+      .steps { grid-template-columns: 1fr; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .bio-credentials { grid-template-columns: 1fr; }
+
+      nav ul { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Biz<span>Jamming</span><small> with Claire Butterfield</small></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">The Jam</a></li>
+      <li><a href="#contact">Let's Talk</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <p class="section-label">Strategic Planning for Small Businesses</p>
+        <h1>Ready to find<br>the <em>thread</em><br>again?</h1>
+        <p>You built something real. Sometimes you just need a focused session to remember where you're headed.</p>
+        <a href="#contact" class="btn">Let's Jam</a>
+        <a href="#services" class="btn btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-image">
+        <img src="Claire with pear Headshot.jpg" alt="Claire Butterfield" style="width:100%;max-width:440px;aspect-ratio:3/4;object-fit:cover;display:block;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <p class="section-label">About Claire</p>
+          <h2 class="section-title">I live for a good whiteboard session.</h2>
+          <div class="about-body">
+            <p>I'm Claire Butterfield — and I kid you not, one of my happiest places is in a room with a table, a whiteboard, and a few engaged minds who aren't afraid to dig deep.</p>
+            <p><strong>Strategic planning fires me up.</strong> After years working across industries and with various strategic frameworks, I decided to formalize that passion into something I could share with the small businesses who need it most.</p>
+            <p>I like goals. I keep a long list of my own. And I'd genuinely love to help you reach yours.</p>
+          </div>
+        </div>
+        <div class="about-callout">
+          <blockquote>
+            "This is for the small business that knows what it's built but has lost the thread a little, and is ready to find it again."
+          </blockquote>
+          <cite>— Claire Butterfield</cite>
+        </div>
+      </div>
+
+      <div class="bio-strip">
+        <h3>Background</h3>
+        <div class="bio-credentials">
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>15+ years across industries</strong>E-commerce, retail, home & commercial services, events, music, and tourism</p>
+          </div>
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>Co-Founder, ADHD Central</strong>Stationary brand carried in Indigo and shipped around the world</p>
+          </div>
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>Co-Founder & Conductor, The Village Choir Collective</strong>Two community ensembles, 200 members strong</p>
+          </div>
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>Former President, White Raven Brands</strong>Scaled Big Star Lights &amp; FestiLight Decor to 8 figures</p>
+          </div>
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>MBA, Executive Leadership</strong>Royal Roads University</p>
+          </div>
+          <div class="bio-cred">
+            <div class="bio-cred-dot"></div>
+            <p><strong>Deep expertise in</strong>Brand building, sales, and marketing strategy</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <p class="section-label">The Offering</p>
+      <h2 class="section-title">Two half-days.<br>Two weeks apart.<br>A lot of clarity.</h2>
+      <p class="services-intro">
+        We'll spend focused, structured time together; enough to go deep, with breathing room in between to let the thinking settle before we lock in the path forward.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <p class="step-number">Session One</p>
+          <h3>Dig In</h3>
+          <p>We start high level — surfacing the problem areas and identifying the strategic pillars that form the foundation of your business.</p>
+        </div>
+        <div class="step">
+          <p class="step-number">Two Weeks Later</p>
+          <h3>Align</h3>
+          <p>We ensure your goals are clear and that everyone on your team is pointed in the same direction. No more crossed wires.</p>
+        </div>
+        <div class="step">
+          <p class="step-number">Session Two</p>
+          <h3>Get Moving</h3>
+          <p>We whittle it down to the immediate tactics to get you there. You walk away with a clearer path, and my number for any future support.</p>
+        </div>
+      </div>
+
+      <div class="for-who">
+        <h3>Is this for you?</h3>
+        <p>If you're a small business owner who knows what you've built, but has lost the thread a little, or if you're ready to stop spinning your wheels and find your focus again — then, yes. This is for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p class="section-label">Get In Touch</p>
+          <h2 class="section-title">Want to jam?</h2>
+          <p>Send me a message and let's see if we're a fit. Whether it's for you or someone you know, I'd love to talk.</p>
+          <p>I typically respond within one business day.</p>
+          <p>You can also email me at <a href="mailto:hello@clairebutterfield.ca" style="color:var(--accent2);">hello@clairebutterfield.ca</a>!</p>
+        </div>
+        <form name="contact" method="POST" action="https://formspree.io/f/xaqadbgd">
+          <div class="form-row">
+            <div>
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            </div>
+          </div>
+          <div>
+            <label for="business">Tell me about your business</label>
+            <input type="text" id="business" name="business" placeholder="What do you do, and how long have you been at it?" />
+          </div>
+          <div>
+            <label for="message">What's on your mind?</label>
+            <textarea id="message" name="message" placeholder="What's the thread you're trying to find? No need to be tidy — this is where the jam starts." required></textarea>
+          </div>
+          <button type="submit" class="btn">Send It</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Claire Butterfield &mdash; BizJamming &mdash; All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
